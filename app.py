@@ -1,5 +1,6 @@
 import re
 import streamlit as st
+from core.verification import verify_article
 
 
 # -----------------------------
@@ -510,6 +511,18 @@ if analyze:
             loaded_words = detect_loaded_language(news_text)
 
             claims = extract_claims(news_text)
+            # Phase 2 verification
+            verification_result = None
+            verification_error = None
+
+            try:
+                verification_result = verify_article(
+                    news_text,
+                    max_claims=3,
+                    sources_per_claim=2,
+            )
+            except Exception as exc:
+                verification_error = str(exc)
 
             overall_score = calculate_score(
                 sensational_score,
@@ -731,7 +744,123 @@ if analyze:
                 emotion_score / 100
             )
 
+        # ============================================================
+        # PHASE 2 - CLAIM VERIFICATION
+        # ============================================================
 
+        st.markdown(
+            '<div class="section-title">Claim Verification</div>',
+            unsafe_allow_html=True,
+        )
+
+        if verification_error:
+
+            st.error(
+                f"Verification unavailable: {verification_error}"
+            )
+
+        elif verification_result:
+
+            verification_score = verification_result["overall_score"]
+
+            st.metric(
+                "Verification Score",
+                f"{verification_score}/100",
+            )
+
+            st.caption(
+                f"{verification_result['claim_count']} "
+                "checkable claims analyzed."
+            )
+
+            for index, result in enumerate(
+                verification_result["claims"],
+                start=1,
+            ):
+
+                verdict = result["verdict"]
+                confidence = result["confidence"]
+
+                st.markdown(f"### Claim {index}")
+
+                st.write(result["claim"])
+
+                if verdict == "SUPPORTED":
+
+                    st.success(
+                        f"✓ SUPPORTED — {confidence}% confidence"
+                    )
+
+                elif verdict == "PARTIALLY_SUPPORTED":
+
+                    st.warning(
+                        f"⚠ PARTIALLY SUPPORTED — "
+                        f"{confidence}% confidence"
+                    )
+
+                elif verdict == "CONTRADICTED":
+
+                    st.error(
+                        f"✕ CONTRADICTED — "
+                        f"{confidence}% confidence"
+                    )
+
+                else:
+
+                    st.info(
+                        f"? UNVERIFIED — "
+                        f"{confidence}% confidence"
+                    )
+
+                evidence = result.get("evidence", [])
+
+                if evidence:
+
+                    with st.expander(
+                        f"View evidence ({len(evidence)} sources)"
+                    ):
+
+                        for source in evidence:
+
+                            title = source.get(
+                                "title",
+                                "Source",
+                            )
+
+                            url = source.get(
+                                "url",
+                                "",
+                            )
+
+                            content = source.get(
+                                "content",
+                                "",
+                            )
+
+                            score = source.get(
+                                "search_score",
+                                0,
+                            )
+
+                            st.markdown(
+                                f"**{title}**"
+                            )
+
+                            if content:
+                                st.write(
+                                    content[:700]
+                                )
+
+                            st.caption(
+                                f"Search relevance: {score:.2f}"
+                            )
+
+                            if url:
+                                st.markdown(
+                                    f"[Open source]({url})"
+                                )
+
+                            st.divider()
         # -----------------------------
         # DISCLAIMER
         # -----------------------------
@@ -739,10 +868,9 @@ if analyze:
         st.markdown("---")
 
         st.caption(
-            "⚠️ NewsLens Phase 1 analyzes linguistic and presentation signals. "
-            "It is not a fact-checking system yet. Source verification, "
-            "cross-source comparison and evidence retrieval are planned "
-            "for the next phase."
+            "NewsLens provides evidence-assisted claim verification using live web sources. "
+    "Results are informational and should be independently checked."
+            
         )
 
 
