@@ -1,22 +1,23 @@
 from __future__ import annotations
 
-from typing import List, Dict
-from urllib.parse import quote
-import requests
+import os
+from typing import Any
+
+from tavily import TavilyClient
 
 
-def search_sources(claim: str, max_results: int = 5) -> List[Dict[str, str]]:
+def search_sources(
+    claim: str,
+    max_results: int = 5,
+) -> list[dict[str, Any]]:
     """
-    Search the web for sources related to a claim.
+    Search the web for evidence related to a factual claim.
 
-    Uses DuckDuckGo's public HTML search endpoint as a simple
-    dependency-free first implementation.
-
-    Returns:
-        A list of dictionaries containing:
-        - title
-        - url
-        - snippet
+    Returns normalized search results containing:
+    - title
+    - url
+    - content
+    - score
     """
 
     if not isinstance(claim, str):
@@ -30,60 +31,33 @@ def search_sources(claim: str, max_results: int = 5) -> List[Dict[str, str]]:
     if max_results <= 0:
         return []
 
-    url = f"https://html.duckduckgo.com/html/?q={quote(claim)}"
+    api_key = os.getenv("TAVILY_API_KEY")
 
-    headers = {
-        "User-Agent": (
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-            "AppleWebKit/537.36 Chrome/131.0 Safari/537.36"
+    if not api_key:
+        raise RuntimeError(
+            "TAVILY_API_KEY is not set."
         )
-    }
 
-    try:
-        response = requests.get(
-            url,
-            headers=headers,
-            timeout=10,
-        )
-        response.raise_for_status()
+    client = TavilyClient(api_key=api_key)
 
-    except requests.RequestException:
-        return []
+    response = client.search(
+        query=claim,
+        search_depth="advanced",
+        max_results=max_results,
+        include_answer=False,
+        include_raw_content=False,
+    )
 
-    from bs4 import BeautifulSoup
+    results = []
 
-    soup = BeautifulSoup(response.text, "html.parser")
-
-    results: List[Dict[str, str]] = []
-
-    for result in soup.select(".result"):
-
-        title_element = result.select_one(".result__a")
-        snippet_element = result.select_one(".result__snippet")
-
-        if title_element is None:
-            continue
-
-        title = title_element.get_text(" ", strip=True)
-        result_url = title_element.get("href", "").strip()
-
-        snippet = ""
-
-        if snippet_element is not None:
-            snippet = snippet_element.get_text(" ", strip=True)
-
-        if not result_url:
-            continue
-
+    for item in response.get("results", []):
         results.append(
             {
-                "title": title,
-                "url": result_url,
-                "snippet": snippet,
+                "title": item.get("title", ""),
+                "url": item.get("url", ""),
+                "content": item.get("content", ""),
+                "score": item.get("score", 0.0),
             }
         )
-
-        if len(results) >= max_results:
-            break
 
     return results

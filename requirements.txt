@@ -3,3 +3,4 @@ pytest
 requests
 beautifulsoup4
 google-genai
+tavily-python
