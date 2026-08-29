@@ -5,7 +5,7 @@
 
 ## 🚀 Live Demo
 
-👉 **[Launch NewsLens](https://newslens-phase-2.streamlit.app/)**
+👉 **[Launch NewsLens](https://newslens-phase-2-tnx68dxujz7qh8bzxytf9e.streamlit.app/)**
 
 No installation or local setup required.
 
