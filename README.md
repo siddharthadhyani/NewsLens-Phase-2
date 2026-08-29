@@ -1,12 +1,8 @@
 # 📰 NewsLens
 
-### AI-Assisted Media Literacy & Information Analysis
+> **Understand the news. Don't just read it.**
 
-> **Understand how information is presented before you believe it.**
-
-NewsLens is an AI-assisted web application that analyzes the **language and presentation style of news content**.
-
-Instead of immediately deciding whether a news story is true or false, NewsLens first examines how the information is presented — including tone, sensationalism, emotional framing, loaded language, and potential factual claims.
+NewsLens is an AI-assisted media literacy and evidence-based news analysis tool. It analyzes how a news story is presented and helps users investigate potentially factual claims using live web sources.
 
 ---
 
@@ -20,36 +16,59 @@ News consumers are exposed to large amounts of information every day. Headlines 
 - Strong positive or negative language
 - Claims presented without immediate context
 
-NewsLens helps users become more aware of these presentation signals before accepting information at face value.
+NewsLens helps users examine these signals before accepting information at face value.
 
 ---
 
 ## 💡 Our Solution
 
-NewsLens takes a piece of news text and performs multiple analyses:
+NewsLens analyzes a news article in two layers:
 
-1. **Tone Analysis**
-2. **Content Type Classification**
-3. **Sensationalism Detection**
-4. **Emotional Framing Analysis**
-5. **Loaded Language Detection**
-6. **Potential Factual Claim Extraction**
-7. **Overall Presentation Score**
+### Phase 1 — Presentation Analysis
 
-The results are presented through an interactive dashboard.
+The system analyzes how the article is written and presented.
+
+1. Tone Analysis
+2. Content Type Classification
+3. Sensationalism Detection
+4. Emotional Framing Analysis
+5. Loaded Language Detection
+6. Potential Factual Claim Extraction
+7. Overall Presentation Score
+
+### Phase 2 — Evidence-Assisted Claim Verification
+
+Potentially checkable claims are investigated using live web search.
+
+1. Extract checkable claims
+2. Search live web sources using Tavily
+3. Retrieve evidence and source content
+4. Compare claims with retrieved evidence
+5. Classify claims as:
+   - ✅ Supported
+   - ⚠️ Partially Supported
+   - ❌ Contradicted
+   - ❓ Unverified
+6. Calculate a claim-verification score
+7. Display supporting sources and evidence to the user
 
 ---
 
-## 🚀 Phase 1 Features
-
-### 🗣️ Tone Analysis
-
-Identifies the overall tone of the text.
-
-Example:
+## 🔎 Phase 2 Verification Pipeline
 
 ```text
-Positive
-Negative
-Neutral
-Mixed / Unclear
+News Article
+     ↓
+Claim Extraction
+     ↓
+Live Web Search
+     ↓
+Evidence Retrieval
+     ↓
+Evidence Comparison
+     ↓
+Claim Verdict
+     ↓
+Verification Score
+     ↓
+Sources & Evidence
