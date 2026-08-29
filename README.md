@@ -1,4 +1,13 @@
+
 # 📰 NewsLens
+
+> **Understand the news. Don't just read it.**
+
+## 🚀 Live Demo
+
+👉 **[Launch NewsLens](https://newslens-phase-2.streamlit.app/)**
+
+No installation or local setup required.
 
 > **Understand the news. Don't just read it.**
 
