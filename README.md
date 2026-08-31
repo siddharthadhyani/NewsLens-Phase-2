@@ -7,7 +7,7 @@
 
 👉 **[Launch NewsLens](https://newslens-phase-2-tnx68dxujz7qh8bzxytf9e.streamlit.app/)**
 
-No installation or local setup required.
+No installation or local setup required..
 
 > **Understand the news. Don't just read it..**
 
@@ -24,8 +24,8 @@ News consumers are exposed to huge amounts of information every day. A news stor
 Common warning signals include:
 
 - Sensational language.
-- Emotional framing
-- Loaded words
+- Emotional framing.
+- Loaded words.
 - Strong positive or negative language
 - Exaggerated statements
 - Potential factual claims without immediate supporting context
