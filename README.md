@@ -23,7 +23,7 @@ News consumers are exposed to huge amounts of information every day. A news stor
 
 Common warning signals include:
 
-- Sensational language
+- Sensational language.
 - Emotional framing
 - Loaded words
 - Strong positive or negative language
