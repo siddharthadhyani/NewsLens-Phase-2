@@ -11,7 +11,7 @@ No installation or local setup required.
 
 > **Understand the news. Don't just read it..**
 
-NewsLens is an AI-assisted media literacy and evidence-assisted news analysis platform designed to help users understand both **how a news story is presented** and **whether potentially factual claims are supported by available evidence**.
+NewsLens is an AI-assisted media literacy and evidence-assisted news analysis platform designed to help users understand both **how a news story is presented** and **whether potentially factual claims are supported by available evidence**..
 
 News articles can influence readers through sensational headlines, emotional language, loaded wording, and claims that are presented without enough context. NewsLens gives users a structured way to examine these signals instead of simply accepting an article at face value.
 
