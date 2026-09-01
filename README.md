@@ -90,7 +90,7 @@ The system:
 
 ---
 
-## 🔬 Phase 2 Architecture
+## 🔬 Phase 2 Architecture.
 
 ```text
                  News Article
