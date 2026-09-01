@@ -1,5 +1,5 @@
 
-# 📰 NewsLens
+# 📰 NewsLens.
 
 > **Understand the news. Don't just read it..**
 
