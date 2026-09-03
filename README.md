@@ -19,7 +19,7 @@ News articles can influence readers through sensational headlines, emotional lan
 
 ## 🎯 Problem Statement.
 
-News consumers are exposed to huge amounts of information every day. A news story can influence perception not only through the facts it presents, but also through the way those facts are written and framed.
+News consumers are exposed to huge amounts of information every day. A news story can influence perception not only through the facts it presents, but also through the way those facts are written and framed..
 
 Common warning signals include:
 
