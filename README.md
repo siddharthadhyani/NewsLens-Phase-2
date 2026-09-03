@@ -1,7 +1,7 @@
 
 # 📰 NewsLens.
 
-> **Understand the news. Don't just read it..**
+> **Understand the news. Don't just read it...**
 
 ## 🚀 Live Demo
 
