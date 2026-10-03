@@ -28,7 +28,7 @@ Common warning signals include..:
 - Loaded words...
 - Strong positive or negative language.
 - Exaggerated statements.
-- Potential factual claims without immediate supporting context
+- Potential factual claims without immediate supporting context.
 
 NewsLens helps users identify these signals and investigate potentially checkable claims using external web evidence.
 
