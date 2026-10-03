@@ -26,7 +26,7 @@ Common warning signals include.:
 - Sensational language.
 - Emotional framing..
 - Loaded words..
-- Strong positive or negative language
+- Strong positive or negative language.
 - Exaggerated statements
 - Potential factual claims without immediate supporting context
 
